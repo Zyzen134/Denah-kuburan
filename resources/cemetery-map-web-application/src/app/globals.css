@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 220 15% 8%;
+    --foreground: 210 20% 98%;
+    --card: 220 15% 12%;
+    --card-foreground: 210 20% 98%;
+    --primary: 280 40% 50%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 15% 20%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 210 20% 70%;
+    --accent: 45 90% 60%;
+    --accent-foreground: 220 15% 8%;
+    --border: 220 15% 25%;
+    --ring: 280 40% 50%;
+  }
+}
+
+@layer utilities {
+  .text-shadow-soft {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .bg-gradient-memorial {
+    background: linear-gradient(135deg, #1a1625 0%, #2d1b3d 50%, #1a1625 100%);
+  }
+  
+  .bg-gradient-card {
+    background: linear-gradient(135deg, rgba(42, 32, 52, 0.8) 0%, rgba(32, 24, 42, 0.9) 100%);
+  }
+}
+
+body {
+  @apply bg-[#0f0d14] text-gray-200;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(88, 28, 135, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(45, 27, 61, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+.memorial-card {
+  @apply backdrop-blur-sm border border-purple-900/30 rounded-lg shadow-xl hover:shadow-2xl hover:border-purple-700/50 transition-all duration-300;
+  background: linear-gradient(135deg, rgba(42, 32, 52, 0.8) 0%, rgba(32, 24, 42, 0.9) 100%);
+}
+
+.grave-plot {
+  @apply border-2 transition-all duration-200 cursor-pointer;
+}
+
+.grave-plot.available {
+  @apply border-gray-600 bg-gray-800/50 hover:bg-gray-700/60 hover:border-gray-500;
+}
+
+.grave-plot.occupied {
+  @apply border-purple-600 bg-purple-900/30 hover:bg-purple-800/40 hover:border-purple-500;
+}
+
+.grave-plot.reserved {
+  @apply border-yellow-600 bg-yellow-900/20 hover:bg-yellow-800/30 hover:border-yellow-500;
+}
