@@ -18,6 +18,11 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            if (Auth::user()->role === 'admin') {
+                return redirect('/admin/dashboard');
+            }
+
             return redirect()->intended('/Dashboard');
         }
 
@@ -40,9 +45,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::login($user);
-
-        return redirect('/Dashboard');
+        return redirect('/login')->with('success', 'Akun berhasil dibuat! Silakan masuk.');
     }
 
     public function logout(Request $request)

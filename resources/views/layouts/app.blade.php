@@ -70,6 +70,7 @@
             </div>
           </a>
 
+          @if(!request()->is('login') && !request()->is('register'))
           <nav class="hidden md:flex space-x-1">
             <a href="{{ url('/Dashboard') }}" class="px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 {{ request()->is('Dashboard') ? 'bg-purple-700/50 text-white shadow-lg' : 'text-gray-300 hover:bg-purple-900/30 hover:text-white' }}">
                 <span>🏛️</span>
@@ -87,6 +88,18 @@
                 <span>🔍</span>
                 <span class="font-medium">Pencarian</span>
             </a>
+
+
+            @auth
+            <div class="border-l border-purple-900/50 h-8 mx-2"></div>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 text-red-400 hover:bg-red-900/30 hover:text-red-300">
+                    <span>🚪</span>
+                    <span class="font-medium">Keluar</span>
+                </button>
+            </form>
+            @endauth
           </nav>
 
           <div class="md:hidden">
@@ -96,12 +109,25 @@
               </svg>
             </button>
           </div>
+          @endif
         </div>
 
+        @if(!request()->is('login') && !request()->is('register'))
         <!-- Mobile Menu (hidden by default) -->
         <nav class="hidden pb-4 space-y-1">
             <!-- Mobile nav items... -->
+
+            @auth
+            <form method="POST" action="{{ route('logout') }}" class="w-full border-t border-purple-900/50 mt-2 pt-2">
+                @csrf
+                <button type="submit" class="w-full text-left px-4 py-2 text-red-400 hover:bg-red-900/30 flex items-center space-x-2">
+                    <span>🚪</span>
+                    <span class="font-medium">Keluar</span>
+                </button>
+            </form>
+            @endauth
         </nav>
+        @endif
       </div>
     </header>
 

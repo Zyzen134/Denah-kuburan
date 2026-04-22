@@ -24,6 +24,12 @@
         <form class="mt-8 space-y-6" action="{{ url('/login') }}" method="POST">
             @csrf
             
+            @if (session('success'))
+                <div class="bg-green-900/50 border border-green-500 text-green-200 px-4 py-3 rounded-lg text-sm mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             @if ($errors->any())
                 <div class="bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded-lg text-sm">
                     {{ $errors->first() }}
