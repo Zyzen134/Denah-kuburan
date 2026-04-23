@@ -72,18 +72,7 @@
 
           @if(!request()->is('login') && !request()->is('register'))
           <nav class="hidden md:flex space-x-1">
-            <a href="{{ url('/Dashboard') }}" class="px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 {{ request()->is('Dashboard') ? 'bg-purple-700/50 text-white shadow-lg' : 'text-gray-300 hover:bg-purple-900/30 hover:text-white' }}">
-                <span>🏛️</span>
-                <span class="font-medium">Beranda</span>
-            </a>
-            <a href="{{ url('/map') }}" class="px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 {{ request()->is('map') ? 'bg-purple-700/50 text-white shadow-lg' : 'text-gray-300 hover:bg-purple-900/30 hover:text-white' }}">
-                <span>🗺️</span>
-                <span class="font-medium">Denah Makam</span>
-            </a>
-            <a href="{{ url('/deceased') }}" class="px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 {{ request()->is('deceased') ? 'bg-purple-700/50 text-white shadow-lg' : 'text-gray-300 hover:bg-purple-900/30 hover:text-white' }}">
-                <span>📖</span>
-                <span class="font-medium">Daftar Almarhum</span>
-            </a>
+
             <a href="{{ url('/search') }}" class="px-4 py-2 rounded-lg transition-all duration-200 flex items-center space-x-2 {{ request()->is('search') ? 'bg-purple-700/50 text-white shadow-lg' : 'text-gray-300 hover:bg-purple-900/30 hover:text-white' }}">
                 <span>🔍</span>
                 <span class="font-medium">Pencarian</span>

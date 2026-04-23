@@ -14,6 +14,7 @@ class SearchController extends Controller
 
         if ($query) {
             $results = Deceased::where('name', 'like', '%' . $query . '%')
+                               ->orWhere('grave_number', 'like', '%' . $query . '%')
                                ->orderBy('name', 'asc')
                                ->get();
         }

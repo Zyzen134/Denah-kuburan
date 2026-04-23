@@ -55,8 +55,10 @@
                     </td>
                     <td class="py-3 px-4 text-sm text-right">
                         <div class="flex justify-end items-center space-x-2">
+                            <a href="{{ route('admin.deceaseds.print', $deceased->id) }}" target="_blank" class="text-blue-600 hover:text-blue-900 font-medium" title="Cetak Dokumen">Cetak</a>
+                            <span class="text-gray-300">|</span>
                             <a href="{{ route('admin.deceaseds.edit', $deceased->id) }}" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
-                            
+                            <span class="text-gray-300">|</span>
                             <form action="{{ route('admin.deceaseds.destroy', $deceased->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data almarhum ini?');">
                                 @csrf
                                 @method('DELETE')

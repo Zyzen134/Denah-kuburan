@@ -57,3 +57,7 @@ Route::put('/admin/deceaseds/{id}', [App\Http\Controllers\AdminController::class
 Route::delete('/admin/deceaseds/{id}', [App\Http\Controllers\AdminController::class, 'deleteDeceased'])
     ->middleware(['auth', App\Http\Middleware\AdminMiddleware::class])
     ->name('admin.deceaseds.destroy');
+
+Route::get('/admin/deceaseds/{id}/print', [App\Http\Controllers\AdminController::class, 'printDeceased'])
+    ->middleware(['auth', App\Http\Middleware\AdminMiddleware::class])
+    ->name('admin.deceaseds.print');

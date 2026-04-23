@@ -24,7 +24,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
-                <input type="text" name="q" value="{{ $query }}" placeholder="Ketik nama almarhum..." 
+                <input type="text" name="q" value="{{ $query }}" placeholder="Ketik nama almarhum atau nomor makam..." 
                     class="w-full py-4 px-4 bg-transparent text-white placeholder-gray-500 focus:outline-none text-lg">
                 <button type="submit" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium py-4 px-8 transition-colors duration-300">
                     Cari
@@ -81,16 +81,38 @@
                                     <!-- Lokasi Makam -->
                                     <div class="flex items-center text-amber-200/90 justify-center sm:justify-start bg-amber-900/20 py-2 px-3 rounded-lg border border-amber-900/30 inline-flex mt-2">
                                         <span class="mr-2">📍</span>
-                                        <span class="font-medium">Lokasi: Blok {{ $deceased->block }}, Nomor {{ $deceased->grave_number }}</span>
+                                        <span class="font-medium mr-2">Lokasi: Blok {{ $deceased->block }}, Nomor {{ $deceased->grave_number }}</span>
+                                        @if($deceased->google_maps_link)
+                                        <button type="button" onclick="document.getElementById('map-{{$deceased->id}}').classList.toggle('hidden')" class="text-amber-300 hover:text-white transition-colors bg-amber-800/40 p-1.5 rounded-md hover:bg-amber-700/60" title="Lihat Peta">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                            </svg>
+                                        </button>
+                                        @endif
                                     </div>
                                 </div>
 
                                 @if($deceased->google_maps_link)
-                                <div class="mt-4 w-full">
+                                <div id="map-{{$deceased->id}}" class="mt-4 w-full hidden transition-all duration-300">
                                     <h4 class="text-sm font-semibold text-gray-400 mb-2 text-left">Peta Lokasi Makam:</h4>
-                                    <div class="rounded-lg overflow-hidden border border-purple-500/30 w-full" style="height: 250px;">
-                                        {!! str_replace('<iframe ', '<iframe style="width:100%; height:100%;" ', $deceased->google_maps_link) !!}
-                                    </div>
+                                    @if(str_starts_with(trim($deceased->google_maps_link), '<iframe'))
+                                        <div class="rounded-lg overflow-hidden border border-purple-500/30 w-full" style="height: 250px;">
+                                            {!! str_replace('<iframe ', '<iframe style="width:100%; height:100%;" ', $deceased->google_maps_link) !!}
+                                        </div>
+                                    @else
+                                        <a href="{{ $deceased->google_maps_link }}" target="_blank" class="block rounded-lg overflow-hidden border border-purple-500/30 w-full relative group hover:border-purple-400 transition-colors" style="height: 250px;">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex flex-col items-center justify-center">
+                                                <div class="bg-gray-900/50 p-6 rounded-full mb-4 group-hover:scale-110 group-hover:bg-purple-900/30 transition-all duration-300">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-purple-400" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                                <span class="text-white font-medium px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full shadow-lg group-hover:from-purple-500 group-hover:to-indigo-500 transition-all">
+                                                    Buka di Google Maps
+                                                </span>
+                                            </div>
+                                        </a>
+                                    @endif
                                 </div>
                                 @endif
                             </div>

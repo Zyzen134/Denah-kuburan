@@ -105,4 +105,9 @@ class AdminController extends Controller
 
         return redirect()->route('admin.deceaseds')->with('success', 'Data almarhum berhasil dihapus!');
     }
+    public function printDeceased($id)
+    {
+        $deceased = Deceased::findOrFail($id);
+        return view('admin.deceaseds_print', compact('deceased'));
+    }
 }
