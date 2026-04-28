@@ -17,42 +17,53 @@
 
     <style>
         body {
-            background-color: #f3f4f6; /* Lighter background for dashboard content */
-            color: #1f2937;
+            background-color: #0f0d14;
+            color: #e5e7eb;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(88, 28, 135, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(45, 27, 61, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
         }
 
         .sidebar {
-            background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+            background: linear-gradient(180deg, #1a1625 0%, #2d1b3d 100%);
+            border-right: 1px solid rgba(88, 28, 135, 0.3);
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, rgba(26, 22, 37, 0.9) 0%, rgba(45, 27, 61, 0.9) 100%);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(88, 28, 135, 0.3);
         }
     </style>
 </head>
 <body class="antialiased flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
-    <aside class="sidebar w-64 h-full flex flex-col text-white shadow-xl flex-shrink-0 transition-all duration-300">
+    <aside class="sidebar w-64 h-full flex flex-col text-white shadow-2xl flex-shrink-0 transition-all duration-300">
         <!-- Sidebar Header -->
-        <div class="h-16 flex items-center justify-center border-b border-gray-700">
+        <div class="h-16 flex items-center justify-center border-b border-purple-900/40">
             <div class="text-2xl mr-2">🕊️</div>
-            <h1 class="text-lg font-bold tracking-wider uppercase text-gray-200">Admin Panel</h1>
+            <h1 class="text-lg font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-200 to-amber-200 uppercase">Admin Panel</h1>
         </div>
 
         <!-- Sidebar Navigation -->
         <nav class="flex-1 overflow-y-auto py-4">
             <ul class="space-y-1">
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-6 py-3 {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-600 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }} transition-colors">
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-6 py-3 {{ request()->routeIs('admin.dashboard') ? 'bg-purple-900/50 text-white border-r-4 border-purple-400' : 'text-gray-300 hover:bg-purple-900/30 hover:text-white' }} transition-all">
                         <span class="mr-3 text-lg">📊</span>
                         <span class="font-medium">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.users') }}" class="flex items-center px-6 py-3 {{ request()->routeIs('admin.users') ? 'bg-indigo-600 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }} transition-colors">
+                    <a href="{{ route('admin.users') }}" class="flex items-center px-6 py-3 {{ request()->routeIs('admin.users') ? 'bg-purple-900/50 text-white border-r-4 border-purple-400' : 'text-gray-300 hover:bg-purple-900/30 hover:text-white' }} transition-all">
                         <span class="mr-3 text-lg">👥</span>
                         <span class="font-medium">Daftar Pengguna</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.deceaseds') }}" class="flex items-center px-6 py-3 {{ request()->routeIs('admin.deceaseds') ? 'bg-indigo-600 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }} transition-colors">
+                    <a href="{{ route('admin.deceaseds') }}" class="flex items-center px-6 py-3 {{ request()->routeIs('admin.deceaseds') ? 'bg-purple-900/50 text-white border-r-4 border-purple-400' : 'text-gray-300 hover:bg-purple-900/30 hover:text-white' }} transition-all">
                         <span class="mr-3 text-lg">📖</span>
                         <span class="font-medium">Daftar Almarhum</span>
                     </a>
@@ -61,19 +72,19 @@
         </nav>
 
         <!-- Sidebar Footer -->
-        <div class="p-4 border-t border-gray-700">
+        <div class="p-4 border-t border-purple-900/40">
             <div class="flex items-center mb-4 px-2">
-                <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold mr-3">
+                <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold mr-3 shadow-[0_0_10px_rgba(147,51,234,0.5)]">
                     A
                 </div>
                 <div>
                     <p class="text-sm font-medium text-white">{{ auth()->user()->name ?? 'Admin' }}</p>
-                    <p class="text-xs text-gray-400">Administrator</p>
+                    <p class="text-xs text-purple-300">Administrator</p>
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="w-full flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded transition-colors text-sm font-medium shadow">
+                <button type="submit" class="w-full flex items-center justify-center px-4 py-2 bg-red-900/60 hover:bg-red-800/80 text-red-200 border border-red-800/50 rounded transition-colors text-sm font-medium shadow">
                     <span class="mr-2">🚪</span>
                     Logout
                 </button>
@@ -85,20 +96,20 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         
         <!-- Top Navbar -->
-        <header class="h-16 bg-white shadow flex items-center justify-between px-6 z-10 flex-shrink-0">
+        <header class="h-16 admin-header shadow-lg flex items-center justify-between px-6 z-10 flex-shrink-0">
             <div>
-                <h2 class="text-xl font-semibold text-gray-800">@yield('header_title', 'Dashboard')</h2>
+                <h2 class="text-xl font-semibold text-purple-100">@yield('header_title', 'Dashboard')</h2>
             </div>
             
             <div class="flex items-center space-x-4">
-                <a href="{{ url('/') }}" target="_blank" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                <a href="{{ url('/') }}" target="_blank" class="text-sm text-purple-300 hover:text-purple-100 font-medium flex items-center transition-colors">
                     <span class="mr-1">🌐</span> Lihat Website
                 </a>
             </div>
         </header>
 
         <!-- Content -->
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+        <main class="flex-1 overflow-x-hidden overflow-y-auto p-6" style="background: transparent;">
             @if(session('success'))
                 <div class="mb-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm" role="alert">
                     <p>{{ session('success') }}</p>
